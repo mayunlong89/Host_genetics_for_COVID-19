@@ -1,0 +1,124 @@
+---
+title: "Analysis workflow for s-prediXcan using MASHR-based model"
+author: YYH
+date: 2020/6/27
+output: html_notebook
+---
+
+`The MASHR-based models are biologically informed and perform better, but demand some GWAS preprocessing`
+`mashr_eqtl.tar` and `mashr_sqtl.tar`
+`GTEx-V8, hg38 as reference`
+
+git clone https://github.com/hakyimlab/summary-gwas-imputation.git
+git clone https://github.com/hakyimlab/MetaXcan.git
+## Integrating GWAS and GTEX v8 transcriptome prediction models
+* harmonization and imputation of GWAS variants to a reference QTL set.
+* Match GWAS variants to variants in transcriptome prediction models.
+
+
+```shell script
+ssh fat01
+### set variable
+conda env create -f GWAS_tools/summary-gwas-imputation-master/src/conda_env.yaml
+source activate imlabtools
+
+export DATA=Database/data
+export GWAS_TOOLS=GWAS_tools/summary-gwas-imputation-master/src
+export METAXCAN=MetaXcan-master/software/
+export OUTPUT=results
+
+### harmonize input gWAS to our reference
+cd /data1/yaoyh/COVID_GWAS
+sed -i 's/ /\t/g' meta.final.txt
+#GWAS columns to be split with tabs#
+sed 's/.$//' s_prediXcan.sh > s_prediXcan_UNIX.sh
+
+python $GWAS_TOOLS/gwas_parsing.py \
+-gwas_file meta.final.txt \
+-liftover $DATA/liftover/hg19ToHg38.over.chain.gz \
+-snp_reference_metadata $DATA/reference_panel_1000G/variant_metadata.txt.gz METADATA \
+-output_column_map MarkerName variant_id \
+-output_column_map Allele2 non_effect_allele \
+-output_column_map Allele1 effect_allele \
+-output_column_map Effect effect_size \
+-output_column_map P-value pvalue \
+-output_column_map CHR chromosome \
+--chromosome_format \
+-output_column_map POS position \
+--insert_value sample_size 680108 --insert_value n_cases 3288 \
+-output_order variant_id panel_variant_id chromosome position effect_allele non_effect_allele frequency pvalue zscore effect_size standard_error sample_size n_cases \
+-output $OUTPUT/harmonized_gwas/COVID_GWAS.txt
+#INFO - 7644792 variants after restricting to reference variants
+
+###GWAS summary stats imputation
+for chr in {1..22}; do
+  for batch in {0..9}; do
+    python $GWAS_TOOLS/gwas_summary_imputation.py \
+    -by_region_file $DATA/eur_ld.bed.gz \
+    -gwas_file $OUTPUT/harmonized_gwas/COVID_GWAS.txt \
+    -parquet_genotype $DATA/reference_panel_1000G/chr${chr}.variants.parquet \
+    -parquet_genotype_metadata $DATA/reference_panel_1000G/variant_metadata.parquet \
+    -window 100000 \
+    -parsimony 7 \
+    -chromosome ${chr} \
+    -regularization 0.1 \
+    -frequency_filter 0.01 \
+    -sub_batches 10 \
+    -sub_batch ${batch} \
+    --standardise_dosages \
+    -output $OUTPUT/summary_imputation_1000G/COVID_GWAS_chr${chr}_sb${batch}_reg0.1_ff0.01_by_region.txt
+  done
+done
+
+###Imputation post-processing
+python $GWAS_TOOLS/gwas_summary_imputation_postprocess.py \
+-gwas_file $OUTPUT/harmonized_gwas/COVID_GWAS.txt \
+-folder $OUTPUT/summary_imputation_1000G \
+-pattern "COVID_GWAS_*" \
+-parsimony 7 \
+-output $OUTPUT/processed_summary_imputation_1000G/imputed_COVID_GWAS.txt
+
+###S-PrediXcan mashr eqtl
+#for name in `ls Database/data/models/eqtl/mashr/*db`; do echo ${name%.db}.txt.gz; done
+for db in `ls Database/data/models/eqtl/mashr/*db`; do
+  python $METAXCAN/SPrediXcan.py \
+  --gwas_file  $OUTPUT/processed_summary_imputation_1000G/imputed_COVID_GWAS.txt \
+  --snp_column panel_variant_id --effect_allele_column effect_allele --non_effect_allele_column non_effect_allele --zscore_column zscore \
+  --model_db_path ${db} \
+  --covariance ${db%.db}.txt.gz \
+  --keep_non_rsid --additional_output --model_db_snp_key varID \
+  --throw \
+  --output_file $OUTPUT/spredixcan/eqtl/mashr/COVID_GWAS_${db##*/}.csv
+done
+
+###S-PrediXcan mashr sqtl
+#for name in `ls Database/data/models/eqtl/mashr/*db`; do echo ${name%.db}.txt.gz; done
+for db in `ls Database/data/models/sqtl/mashr/*db`; do
+  python $METAXCAN/SPrediXcan.py \
+  --gwas_file  $OUTPUT/processed_summary_imputation_1000G/imputed_COVID_GWAS.txt \
+  --snp_column panel_variant_id --effect_allele_column effect_allele --non_effect_allele_column non_effect_allele --zscore_column zscore \
+  --model_db_path ${db} \
+  --covariance ${db%.db}.txt.gz \
+  --keep_non_rsid --additional_output --model_db_snp_key varID \
+  --throw \
+  --output_file $OUTPUT/spredixcan/sqtl/mashr/COVID_GWAS_${db##*/}.csv
+done
+
+###S-MultiXcan eqtl
+python $METAXCAN/SMulTiXcan.py \
+--models_folder $DATA/models/eqtl/mashr \
+--models_name_pattern "mashr_(.*).db" \
+--snp_covariance $DATA/models/gtex_v8_expression_mashr_snp_covariance.txt.gz \
+--metaxcan_folder $OUTPUT/spredixcan/eqtl/mashr/ \
+--metaxcan_filter "COVID_GWAS_mashr_(.*).db.csv" \
+--metaxcan_file_name_parse_pattern "(.*)__mashr_(.*).db.csv" \
+--gwas_file  $OUTPUT/processed_summary_imputation_1000G/imputed_COVID_GWAS.txt \
+--snp_column panel_variant_id --effect_allele_column effect_allele --non_effect_allele_column non_effect_allele --zscore_column zscore --keep_non_rsid --model_db_snp_key varID \
+--cutoff_condition_number 30 \
+--verbosity 7 \
+--throw \
+--output $OUTPUT/smultixcan/eqtl/COVID_mashr_smultixcan.txt
+
+conda deactivate
+```
+
