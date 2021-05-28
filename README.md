@@ -16,7 +16,6 @@ The systematic identification of host genetic risk factors is essential for the 
 ## 1. GWAS summary data from Ellinghaus et al. (Dataset #1)
 ```
 For this GWAS recently reported by Ellinghaus et al. (11), there were 1,980 patients with severe COVID-19 enrolled from seven hospitals in the Italian and Spanish epicenters of the SARS-CoV-2 pandemic in the Europe. A total of 2,381 control participants were enrolled from Italy and Spain. After stringent quality control and excluding population outliers, 1,610 patients with COVID-19 with respiratory failure (835 Italian and 775 Spanish COVID-19 cases) and 2,205 control participants (1,255 Italian and 950 Spanish controls) were included in the final GWAS. In total, 8,965,091 high-quality SNPs (post imputation R2≥ 0.6 and minor allele frequency (MAF) ≥ 1%) were included in the Italian cohort and 9,140,716 high-quality SNPs in the Spanish cohort. The GWAS summary statistics (COVID_I) are publicly available in the website (www.c19-genetics.eu). For more detailed information, please refer to the original article (11).
-
 ```
 
 ## 2. GWAS summary data from the COVID-19 Host Genetic Consortium (Dataset #2)
@@ -204,6 +203,7 @@ conda deactivate
 ```
 
 # References
+```
 1	Li, Q., Guan, X., Wu, P., Wang, X., Zhou, L., Tong, Y., Ren, R., Leung, K.S.M., Lau, E.H.Y., Wong, J.Y. et al. (2020) Early Transmission Dynamics in Wuhan, China, of Novel Coronavirus-Infected Pneumonia. N Engl J Med, 382, 1199-1207.
 2	(2020) The COVID-19 Host Genetics Initiative, a global initiative to elucidate the role of host genetic factors in susceptibility and severity of the SARS-CoV-2 virus pandemic. European journal of human genetics : EJHG, 28, 715-718.
 3	Dong, E., Du, H. and Gardner, L. (2020) An interactive web-based dashboard to track COVID-19 in real time. The Lancet. Infectious diseases, 20, 533-534.
@@ -275,5 +275,5 @@ conda deactivate
 69	Servin, B. and Stephens, M. (2007) Imputation-based analysis of association studies: candidate regions and quantitative traits. PLoS genetics, 3, e114.
 70	Ma, X., Wang, P., Xu, G., Yu, F. and Ma, Y. (2020) Integrative genomics analysis of various omics data and networks identify risk genes and variants vulnerable to childhood-onset asthma. BMC Med Genomics, 13, 123.
 71	Dong, Z., Ma, Y., Zhou, H., Shi, L., Ye, G., Yang, L., Liu, P. and Zhou, L. (2020) Integrated genomics analysis highlights important SNPs and genes implicated in moderate-to-severe asthma based on GWAS and eQTL datasets. BMC pulmonary medicine, 20, 270.
-
+```
 
