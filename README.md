@@ -1,6 +1,8 @@
 # Integrative Genomics Analysis Reveals a 21q22.11 Locus Contributing Risk to COVID-19.
-This project was conducted to uncover host genetic factors for COVID-19 susceptibility
+This project was conducted to uncover host genetic factors for COVID-19 susceptibility;
+
 All codes relevant to this project were deposited in the current github.
+
 This project have been done and published a paper on Human Molecular Genetics: https://academic.oup.com/hmg/advance-article/doi/10.1093/hmg/ddab125/6265026?login=true
 
 # Abstract
