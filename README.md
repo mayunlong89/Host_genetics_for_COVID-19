@@ -3,7 +3,7 @@ This project was conducted to uncover host genetic factors for COVID-19 suscepti
 
 All codes relevant to this project were deposited in the current github.
 
-This project have been done and published a paper on Human Molecular Genetics: https://academic.oup.com/hmg/advance-article/doi/10.1093/hmg/ddab125/6265026?login=true
+This project have been done and published in [Human Molecular Genetics,2021](https://academic.oup.com/hmg/advance-article/doi/10.1093/hmg/ddab125/6265026?login=true)
 
 # Abstract
 The systematic identification of host genetic risk factors is essential for the understanding and treatment of COVID-19. By performing a meta-analysis of two independent genome-wide association summary datasets (N = 680,128), a novel locus at 21q22.11 was identified to be associated with COVID-19 infection (rs9976829 in IFNAR2-IL10RB, OR = 1.16, 95% CI = 1.09 - 1.23, P = 2.57×10-6). The rs9976829 represents a strong splicing quantitative trait locus for both IFNAR2 and IL10RB genes, especially in lung tissue (P = 1.8×10-24). Integrative genomics analysis of combining GWAS with eQTL data showed the expression variations of IFNAR2 and IL10RB have prominent effects on COVID-19 in various types of tissues, especially in lung tissue. The majority of IFNAR2-expressing cells were dendritic cells (40%) and plasmacytoid dendritic cells (38.5%), and IL10RB-expressing cells were mainly nonclassical monocytes (29.6%). IFNAR2 and IL10RB are targeted by several interferons-related drugs. Together, our results uncover 21q22.11 as a novel susceptibility locus for COVID-19, in which individuals with G alleles of rs9976829 have a higher probability of COVID-19 susceptibility than those with non-G alleles. 
