@@ -8,6 +8,10 @@ This project have been done and published in [Human Molecular Genetics, 2021](ht
 # Abstract
 The systematic identification of host genetic risk factors is essential for the understanding and treatment of COVID-19. By performing a meta-analysis of two independent genome-wide association summary datasets (N = 680,128), a novel locus at 21q22.11 was identified to be associated with COVID-19 infection (rs9976829 in IFNAR2-IL10RB, OR = 1.16, 95% CI = 1.09 - 1.23, P = 2.57×10-6). The rs9976829 represents a strong splicing quantitative trait locus for both IFNAR2 and IL10RB genes, especially in lung tissue (P = 1.8×10-24). Integrative genomics analysis of combining GWAS with eQTL data showed the expression variations of IFNAR2 and IL10RB have prominent effects on COVID-19 in various types of tissues, especially in lung tissue. The majority of IFNAR2-expressing cells were dendritic cells (40%) and plasmacytoid dendritic cells (38.5%), and IL10RB-expressing cells were mainly nonclassical monocytes (29.6%). IFNAR2 and IL10RB are targeted by several interferons-related drugs. Together, our results uncover 21q22.11 as a novel susceptibility locus for COVID-19, in which individuals with G alleles of rs9976829 have a higher probability of COVID-19 susceptibility than those with non-G alleles. 
 
+
+![Figure 1](https://github.com/mayunlong89/Host_genetics_for_COVID-19/blob/master/figures/Figure%201.jpg)
+
+
 # Introduction
  Coronavirus disease 2019 (COVID-19) has rapidly evolved into a global pandemic (1). The health and economy systems of most nations worldwide are suffering from severe disruptions (2). As of July 13th, 2020, there were more than 12.9 million confirmed patients worldwide with more than 550,000 deaths (3). The clinical manifestations of COVID-19 range from asymptomatic to severe respiratory failure (4). Early studies on COVID-19 infection have concentrated on epidemiology (5, 6), clinical characteristics (7, 8), and genomic features of virus (9, 10). Understanding host genetic factors contributing to COVID-19 susceptibility is essential for the precise management in the community.
   
