@@ -5,6 +5,12 @@ All codes relevant to this project were deposited in the current github.
 
 This project have been done and published in [Human Molecular Genetics, 2021](https://academic.oup.com/hmg/advance-article/doi/10.1093/hmg/ddab125/6265026?login=true)
 
+# Other COVID-19-related projects in our group:
+1) Identification of genetics-influenced immune cell sub-populations relevant to severe COVID-19. see [Ma et al. Genome Medicine, 2022](https://link.springer.com/article/10.1186/s13073-022-01021-1), and see related [Github codes](https://github.com/mayunlong89/COVID19_scRNA).
+2) Repurposing cell type-specific durg targets for severe COVID-19 based on human organoids scRNA-seq atlas. see [Ma et al. Cell Proliferation, 2023](https://onlinelibrary.wiley.com/doi/full/10.1111/cpr.13558), and see related [Github codes](https://github.com/mayunlong89/scHuman_organoids_COVID19)
+
+
+
 # Abstract
 The systematic identification of host genetic risk factors is essential for the understanding and treatment of COVID-19. By performing a meta-analysis of two independent genome-wide association summary datasets (N = 680,128), a novel locus at 21q22.11 was identified to be associated with COVID-19 infection (rs9976829 in IFNAR2-IL10RB, OR = 1.16, 95% CI = 1.09 - 1.23, P = 2.57×10-6). The rs9976829 represents a strong splicing quantitative trait locus for both IFNAR2 and IL10RB genes, especially in lung tissue (P = 1.8×10-24). Integrative genomics analysis of combining GWAS with eQTL data showed the expression variations of IFNAR2 and IL10RB have prominent effects on COVID-19 in various types of tissues, especially in lung tissue. The majority of IFNAR2-expressing cells were dendritic cells (40%) and plasmacytoid dendritic cells (38.5%), and IL10RB-expressing cells were mainly nonclassical monocytes (29.6%). IFNAR2 and IL10RB are targeted by several interferons-related drugs. Together, our results uncover 21q22.11 as a novel susceptibility locus for COVID-19, in which individuals with G alleles of rs9976829 have a higher probability of COVID-19 susceptibility than those with non-G alleles. 
 
