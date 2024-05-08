@@ -40,7 +40,7 @@ This GWAS summary statistics of the publicly available COVID-19 HGI GWAS meta-an
 
 ### metal.txt
 Meta analysis with METAL
-```
+```shell
 GENOMICCONTROL ON
 SCHEME STDERR
 OVERLAP ON
@@ -120,7 +120,8 @@ git clone https://github.com/hakyimlab/MetaXcan.git
 * Match GWAS variants to variants in transcriptome prediction models.
 
 
-```shell script
+```shell
+#script
 ssh fat01
 ### set variable
 conda env create -f GWAS_tools/summary-gwas-imputation-master/src/conda_env.yaml
