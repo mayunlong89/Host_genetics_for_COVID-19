@@ -67,11 +67,12 @@ OUTFILE  METAANALYSIS_STDERR_ .tbl
 ANALYZE HETEROGENEITY
 
 QUIT
-````
+```
+
 
 ### MAGMA.sh
 This pipepline was designed to manage the results from meta-analysis of GWAS summary statistics and perform a gene-based association analysis by using the MAGMA tool
-~~~
+```shell
 #directory
 MAGMA_DIR = /share/pub/mayl/MAGMA
 DIR = /share/pub/mayl/COVID_I_ANA5_GWAS_for_final_analysis
@@ -104,11 +105,12 @@ cd $WORKING
 ../../magma --gene-results meta2_COVID_I_ANA5_final.results.hg19_SNP_Gene_Analysis_P.genes.raw \
 --set-annot ../../KEGG_for_MAGMA_annotated.txt \
 --out MAGMA_COVID_I_ANA5_final_KEGG_Gene_set_results &
-~~~
+```
+
 
 ### COVID_GWAS_prediXcan.rmd
 Analysis workflow for s-prediXcan using MASHR-based model
-```
+```shell
 `The MASHR-based models are biologically informed and perform better, but demand some GWAS preprocessing`
 `mashr_eqtl.tar` and `mashr_sqtl.tar`
 `GTEx-V8, hg38 as reference`
@@ -119,9 +121,7 @@ git clone https://github.com/hakyimlab/MetaXcan.git
 * harmonization and imputation of GWAS variants to a reference QTL set.
 * Match GWAS variants to variants in transcriptome prediction models.
 
-
-```shell
-#script
+#shell script
 ssh fat01
 ### set variable
 conda env create -f GWAS_tools/summary-gwas-imputation-master/src/conda_env.yaml
